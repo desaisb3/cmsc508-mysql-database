@@ -1,0 +1,61 @@
+Hotel Management System
+
+Description:
+
+The hotel management system is designed to solve the problem of keeping track of the various assets the hotel has, as well as staff and
+clients. The hope is that through using a computerized system in a database rather than paper bookkeeping, the hotel will be able to
+offer online services to clients, as well as have faster access to relevant data when talking with customers, or when reviewing the 
+business.
+
+The scope of this system would be to a single hotel, though it could theoretically be expanded to allow multiple hotels under the
+same company. We want to prove that this management system will work in a single hotel, before potentially expanding it to accomodate
+more.
+
+We expect the system users to be able to: See and modify guests (Id's, Names, DOB, Addresses, Emails, Phone Numbers) 
+See and modify the status of rooms (Room number, GuestID's, Reservation Id's, Room Types, Room floor) See and 
+modify Payments (Payment ID's, Reservation ID's, Guest ID's, Payment Types, Amounts, Payment Dates, Discount) See and
+modify housekeeping informations (Employee ID's, Names, Phone numbers) See and modify shifts for
+housekeeping (Employee ID's, Start times, stop times, dates)
+
+
+The 20 queries required are written below:
+
+1. Find all the guests that have reserved a room.
+
+2. Find all the employees working on a specific date.
+
+3. Find all the rooms that need to be cleaned.
+
+4. Find the guest who has made a reservation for a specific room.
+
+5. Find the room numbers of all rooms available for booking.
+
+6. Find the shifts of all the housekeepers.
+
+7. Find all the payments made to the hotel in the last month in order to make a cash flow statement.
+
+8. Find the emails of all system users for an advertisement to be sent.
+
+9. Find all the payments a guest has made to our hotel.
+
+10. Find all the rooms that have been cleaned by housekeeping, so we can make them available again.
+
+11. Find the payment made by a guest on a certain date to issue a refund.
+
+12. Find which housekeeper cleaned the specific room.
+
+13. List all the guests name who checked-in more than twice this month.
+
+14. List all system users and housekeepers who worked for more than 30 hours this week.
+
+15. List all the guests that stayed in non-smoking rooms
+
+16. Find the list of all customers that were given Veteren or AAA discount on specific date.
+
+17. Find the list of all guests that made payment by American Express.
+
+18. Find the user employee who was working when "John Smith" arrived on a specific date.
+
+19. List all reservations that had more than 2 people in a room.
+
+20. Find the housekeepers who cleaned the room that had pets.

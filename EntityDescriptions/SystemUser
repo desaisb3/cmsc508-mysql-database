@@ -1,0 +1,3 @@
+Holds data regarding the employee ID of the user, username, password, name, address, phone number, and email.
+
+The system user is essentially an adminstrative employee, (a front desk worker or a manager), who will have access to the database.

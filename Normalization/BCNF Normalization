@@ -1,0 +1,42 @@
+                                                            BCNF NORMALIZATION
+
+
+
+i.) Guest(GuestID, Name, DOB, Address, PhoneNumber, Email, Age)
+
+    R1(GuestID, Name, DOB ,Email)
+    R2(Name, Email, PhoneNumber, Address)
+    R3(PhoneNumber, Email)
+    R4(DOB, Age)
+    
+ii.) Payment(PaymentID, ReservationID, GuestID, Payment Type, Amount, PaymentDate)
+    
+    R1(PaymentID, ReservationID, Payment Type, Amount, Payment Date)
+    R2(ReservationID, GuestID)
+    
+iii.) System User(EmployeeID, username, password, Name, Address, Phone Number, Email)
+
+    R1(EmployeeID, username, password)
+    R2(username, Name, Phone Number)
+    R3(Name, Phone Number, Address)
+
+iv.) Reservation(ReservationID, PaymentID, GuestID, Check-In Date, Check-Out Date, Total Person, Pets, Price, Discount Type, Days of Stay)
+
+    R1(ReservationID,GuestID, Payment ID, Total Person, Pets, Price, Discount Type)
+    R2(GuestID, PaymentID, Check-In Date, Check-Out Date, Price)
+    R3(Check-In Date, Check-Out Date, Days of Stay)
+    
+v.) Room (Room Number, GuestID, ReservationID, Room Type, Room Floor)
+
+    R1(Room Number, ReservationID, Room Type, Room Floor)
+    R2(ReservationID, GuestID, Room Number)
+
+vi.) Housekeeper(EmployeeID, Name, Address, PhoneNumber, Rooms Cleaned)
+
+    R1(EmployeeID, Name, Address, PhoneNumber)
+    R2(Name, PhoneNumber,Rooms Cleaned)
+
+vii.) Shift(EmployeeID, Name, PhoneNumber, StartTime, EndTime, Date, Hours Worked)
+
+    R1(EmployeeID, Name, Start Time, EndTime, PhoneNumber)
+    R2(StartTime, EndTime, Hours Worked)

@@ -1,0 +1,61 @@
+                                                                              Privileges
+
+In discussing security, it should be necessary of fully protecting the entire server host (not simply the MySQL server) against all types of applicable attacks: eavesdropping, 
+altering, playback, and denial of service.
+
+MySQL uses security based on Access Control Lists (ACLs) for all connections, queries, and other operations that a user may attempt to perform. There is also some support for
+SSL-encrypted connections between MySQL clients and servers. Many of the concepts discussed here are not specific to MySQL at all; the same general ideas apply to almost all 
+applications. 
+
+The privileges granted to a MySQL account determine which operations the account can perform. MySQL privileges differ in the contexts in which they apply and at different levels of
+operation:
+i.)Administrative privileges enable users to manage operation of the MySQL server. These privileges are global because they are not specific to a particular database.
+
+ii.)Database privileges apply to a database and to all objects within it. These privileges can be granted for specific databases, or globally so that they apply to all databases.
+
+iii.)Privileges for database objects such as tables, indexes, views, and stored routines can be granted for specific objects within a database, for all objects of a given type 
+within a database (for example, all tables in a database), or globally for all objects of a given type in all databases.
+
+The GRANT and REVOKE commands are used for controlling access to MySQL. Do not grant any more privileges than necessary. Never grant privileges to all hosts.
+
+Privileges should be granted to only the person(s) who are assigned to make changes in a database/table. If a person thinks it is necessary to grant the other user the privileges,
+then only should the privileges be granted. 
+If the privilege is no longer required for the person, one should immediately revoke the privileges from the other person to keep the database secured.
+
+A user can be grant the following privileges:
+i.)   SELECT 
+ii.)  INSERT
+iii.) UPDATE
+iv.)  DELETE
+v.)   ALL PRIVILEGES
+
+To create a user to grant all the privileges in the project, the following should be written in mysql:
+
+
+CREATE USER 'sanidhya'@'localhost' IDENTIFIED BY 'password';
+
+The above line creates a user 'sanidhya' who can log in the project/database by entering the password 'password' in mysql. 
+The user here is not granted the privilege to access the database yet. The next step is to assign which privileges should be granted to the user 'sanidhya'. 
+If the user 'sanidhya' is the owner of the project, he can be granted all the privileges by writing the following statement in mysql.
+
+GRANT ALL ON *.* TO 'sanidhya'@'localhost' WITH GRANT OPTION;
+
+The above line gives permission to the user 'sanidhya' to access all the contents of the project which is done using '*.*' (wild card characters which means here all available
+tables in the database). 
+As another user 'nathaniel' is also a part of the project, he needs to be granted access to the whole project to create or to makes changes in the database.
+
+CREATE USER 'david'@'localhost' IDENTIFIED BY 'password';
+
+GRANT ALL ON *.* TO 'nathaniel'@'localhost' WITH GRANT OPTION;
+
+To see the users created in the project, write the following statement in the mysql:
+
+SELECT Host,User from mysql.user;
+
+
+If any suspicious user is seen or found in the project, immediately REVOKE the grants and drop the user from the project.
+Do not trust any data entered by your users. They can try to trick your code by entering special or escaped character sequences in web forms, URLs, or whatever application you 
+have built. Be sure that your application remains secure if a user enters something like "; DROP DATABASE mysql;“. This is an extreme example, but large security leaks and
+data loss may occur as a result of hackers using similar techniques, if you do not prepare for them.
+
+

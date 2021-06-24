@@ -1,0 +1,44 @@
+                                                 FUNCTIONAL DEPENDENCIES
+
+                                                    HOTEL MANAGEMENT
+
+
+i.) Guest(GuestID, Name, DOB, Address, Phone Number, Email, Age)
+
+    GuestID --> Name, DOB, Email
+    Name, Email --> Phone Number, Address 
+    Phonenumber --> Email
+    DOB --> Age
+    
+ii.) Payment(PaymentID, ReservationID, GuestID, PaymentType, Amount, Payment Date)
+    
+    PaymentID --> PaymentType, Amount, Payment Date, ReservationID
+    ReservationID --> GuestID
+    
+iii.) System User(EmployeeID, username, password)
+
+    EmployeeID --> username, password
+    
+iv.) Reservation(ReservationID, PaymentID, GuestID, Check-In Date, Check-Out Date, Total Person, Pets, Price, Discount Type, Days of Stay)
+
+    ReservationID --> GuestID, Payment ID, Total Person, Pets, Price, Discount Type
+    GuestID -->  PaymentID, Check-In Date, Check-Out Date, Price
+    Check-In Date, Check-Out Date --> Days of Stay
+
+v.) Room (Room Number, GuestID, ReservationID, Room Type, Room Floor)
+
+    Room Number --> ReservationID, Room Type, Room Floor
+    ReservationID --> GuestID, Room Number
+
+vi.) Housekeeper(HousekeeperID, EmployeeID)
+
+    HousekeeperID --> EmployeeID
+
+vii.) Shift(EmployeeID, Name, PhoneNumber, StartTime, EndTime, Date, Hours Worked)
+
+    EmployeeID --> Name, Start Time, EndTime, PhoneNumber
+    StartTime, EndTime --> Hours Worked
+    
+viii.) Employee(EmployeeID, name, phoneNumber, address, email)
+
+    EmployeeID --> name, phoneNumber, address, email

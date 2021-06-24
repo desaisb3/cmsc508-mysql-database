@@ -1,0 +1,4 @@
+The housekeeper entity will have an employee ID that links it to the Shift entity, the name of the housekeeper, and a phone number.
+
+This entity will be used to keep track of all the various housekeepers, as well as work with the Shift entity to keep track of which employees
+are supposed to work on certain days.

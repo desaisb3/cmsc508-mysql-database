@@ -1,0 +1,2 @@
+The room entity will be used to keep track of what guests are in which rooms, and which reservations were made for which rooms.
+The room entity will also have the room number and the floor of the respective room.

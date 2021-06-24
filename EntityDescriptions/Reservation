@@ -1,0 +1,4 @@
+The reservation entity will be used to keep track of the guest who has reserveed a specific room, and link their payment to their reservation.
+The reservation will also have the check in and check out dates of the guest, as well as information regarding the occupants.
+This will be used in order to verify the guest upon arrival, and also to communicate with emergency responders the amount of occupants 
+in the room.

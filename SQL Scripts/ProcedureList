@@ -1,0 +1,13 @@
+Procedure names:
+
+ListAllGuests();
+CreateGuest(varchar(50) name, varchar(50) dob, varchar(255) address, varchar(50) email);
+HireNewEmployee(varchar(50) name, varchar(12) phoneNumber, varchar(255)  address, varchar(50) email);
+CreatePayment(int guestID, varchar(4) paymentType, int amount, Date paymentDate);
+CreateReservation(int paymentID, int guestID, Date checkIN_date, Date checkOUT_date, int totalperson, int pets, int price, varchar(2) discountType);
+CreateNewRoom(int roomno, int guestID, int reservationID, varchar(5) roomType, int roomFloor);
+SetRoomInUse(int roomno, int guestID, int reservationID);
+SetRoomAvailable(int roomno);
+MakeEmployeeAHousekeeper(int empID);
+RemoveEmployee(int empID);
+CreateShiftForEmployee(int empID, varchar(5) startTime, varchar(5) endTime, Date date);

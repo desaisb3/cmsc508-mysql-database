@@ -1,0 +1,64 @@
+CREATE TABLE systemuser(
+username VARCHAR(30) NOT NULL,
+empID INT,
+password VARCHAR(100) NOT NULL,
+name VARCHAR(100) NOT NULL,
+phoneNumber INT,
+email VARCHAR(100),
+PRIMARY KEY (username),
+UNIQUE(username),
+FOREIGN KEY(empID) REFERENCES shift(empID)
+);
+
+CREATE TABLE payment(
+paymentID INT NOT NULL AUTO_INCREMENT,
+guestID INT, 
+paymentType VARCHAR(2) CHECK (paymentType IN ('VI', 'CA', 'MC', 'AX', 'DS')),
+amount FLOAT(10,2),
+paymentDate DATE,
+PRIMARY KEY(paymentID),
+FOREIGN KEY(guestID) REFERENCES guest(guestID) 
+);
+
+CREATE TABLE reservation(
+reservationID INT NOT NULL AUTO_INCREMENT,
+paymentID INT,
+guestID INT,
+checkIN_date DATE,
+checkOUT_date DATE CHECK (checkOUT_date > checkIN_date),
+totalperson INT,
+discountType VARCHAR(2) CHECK (discountType IN ('VV', 'SC', 'EMP')),
+PRIMARY KEY(reservationID),
+FOREIGN KEY(guestID) REFERENCES guest(guestID),
+FOREIGN KEY(paymentID) REFERENCES payment(paymentID)
+);
+
+CREATE TABLE room(
+roomno INT NOT NULL,
+guestID INT,
+reservationID INT,
+roomType VARCHAR(4) CHECK (roomType IN ('DDS', 'NSDD', 'KS', 'NSK')),
+roomFloor INT(3) CHECK (roomFloor IN (1,2,3)),
+PRIMARY KEY(roomno),
+FOREIGN KEY(guestID) REFERENCES guest(guestID),
+FOREIGN KEY(reservationID) REFERENCES reservation(reservationID)
+);
+
+CREATE TABLE shift(
+empID INT NOT NULL,
+startTime VARCHAR(20) NOT NULL,
+endTime VARCHAR(20) NOT NULL,
+date DATE NOT NULL,
+hoursWorked INT(2) NOT NULL,
+PRIMARY KEY(empID)
+);
+
+CREATE TABLE housekeeper(
+empID INT NOT NULL,
+name VARCHAR(100) NOT NULL,
+phoneNumber VARCHAR(15) CHECK (phoneNumber=10),
+shiftTime VARCHAR(20) NOT NULL,
+roomsCleaned INT DEFAULT 0,
+PRIMARY KEY(empID,name),
+FOREIGN KEY (empID) REFERENCES shift(empID)
+);

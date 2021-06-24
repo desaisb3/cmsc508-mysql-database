@@ -1,0 +1,4 @@
+The shift entity will have the employeeID, as well as start and stop times, and the date.
+
+This will be used to keep track of which employees worked at what times, in order to have a consistent schedule and guaranatee
+the employees get paid the proper amount for their work.

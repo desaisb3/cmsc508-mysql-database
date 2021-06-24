@@ -1,0 +1,5 @@
+The payment entity will be used to keep track of all the payments made to the hotel, and the information regarding them, including the
+paymentID, reservationID, guestID, payment type, and amount.
+
+This entity will be used to look up all of the previous payments in order to modify them, prove that money was transferred,or issue refunds.
+A general history of the income of the hotel.

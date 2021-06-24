@@ -1,0 +1,71 @@
+Original queries for problem statement
+---------------------------------------------------------------------
+1. select * from guest INNER JOIN reservation on guest.guestID = reservation.guestID;
+2. select * from shift  INNER JOIN employee  on employee.empID = shift.empID  where date = '2019-06-21';
+3. No longer exists
+4. select * from guest where guestID = (select guestID from room where roomno = '101');
+5. select roomno from room where reservationID is null;
+6. select * from shift INNER JOIN housekeeper on shift.empID = housekeeper.empID;
+7. select * from payment where paymentDate >= '2019-05-01' and paymentDate < '2019-06-1';
+8. select systemuser.empID, employee.email from systemuser INNER JOIN employee on employee.empID = systemuser.empID;
+9. select * from payment where guestID = '1';
+10. No longer exists
+11. select * from payment where guestID = '1' and paymentDate = '2019-01-15';
+12. No longer exists
+13. select count(*), guestID from reservation where checkIN_date >= '2019-01-01' and checkOUT_date < '2019-02-01' group by guestID having count(*) > 2;
+14. 
+15. select reservation.guestID from reservationlog INNER JOIN reservation on reservation.reservationID = reservationlog.reservationID INNER JOIN room on reservationlog.roomno = 	room.roomno where roomType = 'KS' or roomType = 'DDSK';
+16. select guestID from reservation  where discountType = 'VV' or discountType = 'AAA' and checkIN_date = '2019-01-23';
+17. select guestID from payment where paymentType = 'AX';
+18. select employee.name from guest INNER JOIN reservation on guest.guestID = reservation.guestID INNER JOIN shift on shift.date = reservation.checkIN_date INNER JOIN employee on shift.empID = employee.empID where guest.name = 'Joe Jacobs';
+19. select * from reservation where totalperson > '2';
+20. No longer exists
+
+--------------------------------------------------------------------------
+Extra queries for manipulating the data.
+
+Creating a new guest:
+insert into guest (name, dob, address, email, phoneNumber)
+values('Allen', '05-06-1987', '111 north street', 'allen@email.com', '555-555-5555');
+
+Hiring a new system User:
+	insert into systemuser (empID, username, password)
+	values('1', 'employeeUser', 'employeePassword');
+
+Firing an administrator:
+	delete from systemuser where empID = '1';
+
+Creating a new payment:
+	insert into payment (guestID, payment_type, amount, payment_date)
+	values ('1', 'Visa', '75', '12-01-2020');
+
+Creating a new reservation:
+	insert into reservation(paymentID, guestID, checkIN_date, checkOUT_date, totalperson, pets, price, discountType)
+	values('1', '1', '12-01-2020', '12-02-2020', '3', '0', '125', null);
+
+Creating new rooms (for if they expand the hotel, plus the original set up of the hotel)
+	insert into room (roomno, guestID, reservationID, roomType, roomFloor)
+	values('101', null, null, 'single', '1');
+
+Updating the room with a new reservation:
+	update room set guestID = '1', resevationID = '1' where roomno = '101';
+
+Updating a room after a guest leaves:
+	update room set guestID = null, reservationID = null where roomno = '101';
+
+Removing a room from the database (if the room closes down or is damaged):
+	delete from room where roomno = '101';
+
+Hiring a new housekeeper:
+	insert into housekeeper (empID)
+	values('2');
+
+Firing a housekeeper:
+	delete from housekeeper where empID = '2');
+
+Creating a new shift for an employee
+	insert into shift (empID, startTime, endTime, date)
+	values ('1', '8:00', '16:00', '2020-12-01');
+
+Removing a fired employee from the schedule:
+	delete from shift where empID = '1';

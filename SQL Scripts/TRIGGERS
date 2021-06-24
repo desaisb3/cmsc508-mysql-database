@@ -1,0 +1,46 @@
+                                                                     TRIGGERS FOR THE PROJECT
+
+1.) WHEN UPDATING THE CHECKOUT DATE, IF IT IS LESS THAN CHECK IN DATE, IT SHOWS AN ERROR MESSAGE!!
+
+    -> DELIMITER //
+    -> CREATE TRIGGER checkINOUT_message BEFORE UPDATE ON reservation FOR EACH ROW 
+    -> BEGIN
+    ->   DECLARE errorMessage VARCHAR(255);
+    ->   SET errorMessage= CONCAT('The checkout date cannot be before check-in date. Please try again.');
+    ->   IF new.checkOUT_date<reservation.checkIN_date THEN
+    ->     SIGNAL SQLSTATE '45000'
+    ->     SET MESSAGE_TEXT=errorMessage;
+    ->   END IF;
+    -> END //
+    
+    
+    
+2.) WHEN A SYSTEM USER UPDATES HIS/HER PASSWORD, THE OLD PASSWORD AND NEW PASSWORD ARE UPDATED IN A DIFFERENT TABLE
+
+    -> DELIMITER //
+    -> CREATE TRIGGER sysuser_password_info
+    -> AFTER UPDATE
+    -> ON systemuser
+    -> FOR EACH ROW
+    -> BEGIN
+    ->   IF old.password<>new.password THEN
+    ->     INSERT INTO password_log(username, new_password, old_password)
+    ->     VALUES (systemuser.username, new.password, old.password);
+    ->   END IF;
+    -> END //
+    
+    
+    
+ 3.) A TABLE TO REMIND EMPLOYEES TO ADD THEIR EMAIL TO GET EMPLOYEE DISCOUNT
+ 
+ 
+    -> DELIMITER //
+    -> CREATE TRIGGER remind_employees
+    -> AFTER INSERT
+    -> ON employee FOR EACH ROW
+    -> BEGIN
+    ->   IF new.email IS NULL THEN
+    ->     INSERT INTO reminders(member_id,message)
+    ->     VALUES(new.id,CONCAT('Please add your email later ',new.name));
+    ->   END IF;
+    -> END //

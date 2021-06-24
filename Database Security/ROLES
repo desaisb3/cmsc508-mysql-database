@@ -1,0 +1,51 @@
+                                                                        ROLES IN DATABASE
+                                                                      
+A user account can be granted roles, which grants to the account the privileges associated with each role. This enables assignment of sets of privileges to accounts and
+provides a convenient alternative to granting individual privileges, both for conceptualizing desired privilege assignments and implementing them. If the user is provided multiple
+roles, he/she can switch back between the roles and work on them indiviually.
+
+Example:
+
+//Creating role for viewing guest data
+CREATE ROLE guest_data;
+
+
+//Grants the select privilege to the role named 'guest_data'
+GRANT SELECT ON hotel.guest to guest_data;
+
+
+//CREATE USER 'sam' and grant him the access to see the role 'guest_data'.
+CREATE USER 'sam'@'localhost' IDENTIFIED BY 'password123';
+GRANT 'guest_data' to 'sam'@'localhost';
+
+So now, when the user 'sam' logs in the database from SQL Server, he can see the roles that are assigned to him to work on.
+
+To see what roles he has been given he can use this command:
+
+//TO SET THE ROLE 'guest_data'. This should be done by user 'sam'
+SET ROLE 'guest_data'
+SELECT * FROM guest;
+
+Thus, the user 'sam' will able to see the guests' record from the guest table.
+
+So, this select privilege can be granted to the user that has been assigned the task to look and maintain the correct information of guests records.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+As Sanidhya and Nathaniel are the creaters of the project, they can have all access to the database and the whole project which is show in the file name
+'PRIVILEGES'. 
+
+If a third person 'Martin' joins the group of Sanidhya and Nathaniel for the project. He can be assigned to work on specific roles (for example, to update the guest emails).
+This can be done by doing following procedure:
+
+CREATE ROLE 'email_updates';
+GRANT UPDATE ON hotel.guest to email_updates;
+
+CREATE USER 'martin'@'localhost' IDENTIFIED BY 'password123';
+GRANT email_updates to 'martin'@'localhost';
+
+Thus, using these sql statements, Martin has been given the role to update guests' emails whenever possible. Martin only has access to the table 'Guest' in the whole database.
+He cannot access nothing else. Thus, using these secure procedures, Data Security can be maintained.
+
+
+

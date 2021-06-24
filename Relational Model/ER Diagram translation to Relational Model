@@ -1,0 +1,18 @@
+                                             E-R Diagram Translation into Relational Model
+
+
+Guest(GuestID (PK) (Integer), Name (Varchar), DOB (Date), Address (String), Email (Varchar), Phone Number (Integer)),
+
+System User(ShiftID (PK),Employee ID (FK) (Integer), username (Varchar), password (Varchar)),
+
+Reservation (Reservation ID (PK) (Integer), Payment_ID (FK) (Integer), Guest ID (FK) (Integer), Check-In Date (Date), Check-Out Date (Date), Total Person (Integer), Pets (Integer), Price (Integer), Discount Type (String)),
+
+Payment(Payment ID (PK) (Integer), Reservation ID (FK) (Integer), Guest ID (FK) (Integer), Payment Type (String), Amount (Integer), Payment Date (Date)),
+
+Room(Room Number (PK) (Integer), Guest ID (FK) (Integer), Reservation ID (FK) (Integer), Room Type (Varchar), Room Floor (Integer)),
+
+Shift(Employee ID (PK) (Integer), EmployeeID (FK) (Integer), Start Time (Integer), End Time (Integer), Date (Date))),
+
+Housekeeper(Housekeeper ID (Int) (PK), Employee ID (PK) (FK) (Integer),
+
+Employee(EmployeeID (PK), Name (String), Phone Number (Varchar), Email (Varchar), Address (String)).

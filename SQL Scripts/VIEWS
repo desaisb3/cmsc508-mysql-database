@@ -1,0 +1,74 @@
+                                                                             VIEWS
+
+//View to see the guest with payment id 1
+
+create view guest_with_payment_id_1
+as
+select g.guestID, name
+from guest g, payment p
+where p.paymentID=1 and g.guestID=p.guestID;
+
+
+
+
+//View to find the customers getting VV Discount
+
+CREATE VIEW discountTypeVVCustomers
+AS
+SELECT NAME 
+FROM reservation r, guest g 
+WHERE r.guestID=g.guestID AND discountType='VV';
+
+
+
+
+//View to find the name of employess working from 6am to 6pm
+
+create view emp_working_6am_to_6pm 
+as
+select distinct s.empID, e.name from shift s, employee e  
+where startTime='06:00' and endTime='18:00' and e.empID=s.empID;
+
+
+
+
+//View to send email only to System Users
+
+create view send_email_to_systemusers
+as
+select email from employee e, systemuser s  
+where e.empID=s.empID;
+
+
+
+ 
+//View to find who paid $80.00 and on which date
+
+create view amount_80
+as
+select p.guestID, name, paymentDate 
+from payment p, guest g
+where amount='80.00' and p.guestID=g.guestID 
+order by paymentDate desc;
+
+
+
+
+//View to find the total amount by different payment types
+
+create view amount_by_different_types
+as
+select paymentType, sum(amount) from payment group by paymentType order by sum(amount)
+desc;
+
+
+
+
+//View to retrieve the password for system user employee name 'Avery'
+
+
+create view password_for_Avery
+as
+select e.empID, name, username, password
+from employee e, systemuser s
+where e.empID=s.empID and name='Avery';

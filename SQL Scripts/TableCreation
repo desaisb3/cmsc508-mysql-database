@@ -1,0 +1,78 @@
+CREATE TABLE employee(
+empID INT NOT NULL AUTO_INCREMENT,
+name varchar(50),
+phoneNumber varchar(12),
+address varchar(255),
+email varchar(60)
+);
+
+CREATE TABLE systemuser(
+systemUserID int not null AUTO_INCREMENT,
+empID INT,
+username VARCHAR(30) NOT NULL,
+password VARCHAR(100) NOT NULL,
+PRIMARY KEY (systemUserID),
+FOREIGN KEY (empID)  references employee(empID),
+UNIQUE(username)
+);
+
+CREATE TABLE payment(
+paymentID INT NOT NULL AUTO_INCREMENT,
+guestID INT, 
+paymentType VARCHAR(2) CHECK (paymentType IN ('VI', 'CA', 'MC', 'AX', 'DS')),
+amount FLOAT(10,2),
+paymentDate DATE,
+PRIMARY KEY(paymentID),
+FOREIGN KEY(guestID) REFERENCES guest(guestID) 
+);
+
+CREATE TABLE reservation(
+reservationID INT NOT NULL AUTO_INCREMENT,
+paymentID INT,
+guestID INT,
+checkIN_date DATE,
+checkOUT_date DATE CHECK (checkOUT_date > checkIN_date),
+totalperson INT,
+discountType VARCHAR(2) CHECK (discountType IN ('VV', 'SC', 'EMP')),
+PRIMARY KEY(reservationID),
+FOREIGN KEY(guestID) REFERENCES guest(guestID),
+FOREIGN KEY(paymentID) REFERENCES payment(paymentID)
+);
+
+CREATE TABLE room(
+roomno INT NOT NULL,
+guestID INT,
+reservationID INT,
+roomType VARCHAR(4) CHECK (roomType IN ('DDS', 'NSDD', 'KS', 'NSK')),
+roomFloor INT(3) CHECK (roomFloor IN (1,2,3)),
+PRIMARY KEY(roomno),
+FOREIGN KEY(guestID) REFERENCES guest(guestID),
+FOREIGN KEY(reservationID) REFERENCES reservation(reservationID)
+);
+
+CREATE TABLE shift (
+shiftID INT NOT NULL AUTO_INCREMENT,
+ empID INT NOT NULL,
+ startTime varchar(5) NOT NULL,
+ endTime  varchar(5) NOT NULL,
+ date DATE NOT NULL,
+ PRIMARY KEY(shiftID),
+ FOREIGN KEY(empID) references  employee(empID
+));
+
+
+CREATE TABLE housekeeper(
+housekeeperID INT NOT NULL AUTO_INCREMENT,
+empID INT NOT NULL,
+PRIMARY KEY(housekeeperID),
+FOREIGN KEY(empID) references employee(empID)
+);
+
+create table reservationlog (
+reslogID INT NOT NULL AUTO_INCREMENT,
+ roomno INT,
+ reservationID int,
+ PRIMARY KEY(reslogID),
+ FOREIGN KEY (roomno) references room(roomno),
+ FOREIGN KEY (reservationID) references reservation(reservationID)
+);

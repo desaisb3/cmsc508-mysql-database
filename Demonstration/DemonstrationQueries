@@ -1,0 +1,30 @@
+Start from the beginning:
+
+Setting up our company, we need create the rooms in the building.
+CALL CreateNewRoom('110', null, null, 'KS', '1');
+
+Going to need some employees:
+CALL HireNewEmployee('Joseph', '555-444-5544', '101 Joseph lane', 'Joseph@employee.com');
+
+Making Joseph into a housekeeper:
+CALL MakeEmployeeAHousekeeper((select empID from employee where name = 'Joseph'));
+
+We have our first guest!
+Call CreateGuest('Guest1', '12-12-1998', '101 Guest's house lane', 'Guest@email.com');
+
+The guest wants to rent a room for tonight, they have to pay first though!
+CALL CreatePayment((select guestID from guest where name = 'Guest1'), 'CA', '50', '2020-07-04');
+
+Now that the guest has paid, we create a reservation for them!
+CALL CreateReservation(select paymentID from guest INNER JOIN payment on guest.guestID = payment.guestID where name = 'Joe Jacobs' order by paymentID DESC LIMIT 1),
+  (select guestID from guest where name = 'Guest1'), '2020-07-04', '2020-07-05', '1', '0', '75', null);
+  
+Now lets assign the guest a room!
+CALL SetRoomInUse('110', (select guestID from guest where name = 'Guest1'),select reservationID from guest INNER JOIN reservation on guest.guestID = reservation.guestID 
+  where guest.guestID = (select guestID from guest where name = 'Joe Jacobs') order by reservationID DESC LIMIT 1);
+  
+The next morning, the guest is ready to leave! Lets check them out.
+CALL SetRoomAvailable('110');
+
+Now we made some rooms, hired some new employees, registered a guest, got paid by the guest, created a reservation, assigned a room to the guest, 
+  and checked the guest out of the hotel!
