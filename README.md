@@ -1,4 +1,4 @@
-# 508-summer-2020-project
+#  Hotel Management System - CMSC 508 Database Project
 Repository for semester project for CMSC 508, Summer 2020
 
 TEAM MEMBERS
